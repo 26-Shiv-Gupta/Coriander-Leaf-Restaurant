@@ -203,6 +203,11 @@ function WhyUs() {
 
 // ── Location ──────────────────────────────────────────────────────────────────
 function Location() {
+  const MAPS_QUERY = encodeURIComponent('Coriander Leaf Restaurant, Plot No 2, Opp Vishesh Hospital, Geeta Bhawan, Indore, Madhya Pradesh');
+  const MAPS_EMBED  = `https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=${MAPS_QUERY}&zoom=16`;
+  const MAPS_OPEN   = `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`;
+  const MAPS_DIR    = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}`;
+
   return (
     <section className="location" id="contact-us">
       <p className="section-eyebrow">VISIT US</p>
@@ -211,13 +216,7 @@ function Location() {
 
       <div className="location__body">
         <div className="location__map">
-          <iframe
-            title="Coriander Leaf Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.9!2d75.867!3d22.718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd2b3f1e7e5f%3A0x0!2sGeeta+Bhawan%2C+Indore!5e0!3m2!1sen!2sin!4v1000000000000!5m2!1sen!2sin"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.3069487839603!2d75.8811952793457!3d22.7168298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd2ac51668a9%3A0xcb43b52ee4f294f0!2sCoriander%20Leaf%20Restaurant!5e0!3m2!1sen!2sin!4v1775811674222!5m2!1sen!2sin" width="600" height="450" loading="lazy" />
         </div>
 
         <div className="location__info">
@@ -238,7 +237,7 @@ function Location() {
           </div>
           <div className="location__btns">
             <a href="tel:+918717984084" className="btn btn--dark">📞 Call Now</a>
-            <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="btn btn--primary">🗺️ Get Directions</a>
+            <a href="https://maps.app.goo.gl/gq1XFjhqxx67ds5z8" target="_blank" rel="noreferrer" className="btn btn--primary">🗺️ Get Directions</a>
           </div>
         </div>
       </div>

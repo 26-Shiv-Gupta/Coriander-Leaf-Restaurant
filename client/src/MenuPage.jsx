@@ -329,7 +329,7 @@ export default function MenuPage({ onBack }) {
       <div className="info-bar">
         <span>🕒 11 AM–4 PM | 6 PM–11 PM</span>
         <a href="tel:+918717984084" className="info-bar__btn">📞 Call Now</a>
-        <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="info-bar__btn info-bar__btn--gold">📍 Get Directions</a>
+        <a href="https://maps.app.goo.gl/gq1XFjhqxx67ds5z8" target="_blank" rel="noreferrer" className="info-bar__btn info-bar__btn--gold">📍 Get Directions</a>
       </div>
 
       <section className="menu-cta">
