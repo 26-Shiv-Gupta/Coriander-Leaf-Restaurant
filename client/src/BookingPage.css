@@ -785,18 +785,6 @@
 
 .success-actions { display: flex; flex-direction: column; gap: .65rem; }
 
-.btn-whatsapp-success {
-  display: block;
-  padding: .8rem;
-  background: #25d366;
-  color: var(--white);
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: .92rem;
-  transition: background .2s;
-}
-.btn-whatsapp-success:hover { background: #1daf55; }
-
 .btn-new-booking {
   width: 100%;
   padding: .75rem;
@@ -855,4 +843,12 @@
 
   .success-screen__inner { padding: 2rem 1.25rem; }
   .booking-ref__num { font-size: 1.2rem; }
+}
+
+/* ── API Error in Booking ─────────────────────────────── */
+.booking-api-error {
+  background: #fee2e2; border: 1px solid #fca5a5;
+  color: #991b1b; border-radius: 10px;
+  padding: .65rem 1rem; font-size: .85rem;
+  margin-top: .5rem;
 }

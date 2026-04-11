@@ -445,14 +445,6 @@ function SuccessScreen({ form, onBack, onHome }) {
         </div>
 
         <div className="success-actions">
-          <a
-            href={`https://wa.me/918717984084?text=Hi! I just made a reservation (Ref: ${refNo}). Name: ${form.name}, Date: ${formatDate(form.date)}, Time: ${form.time}, Guests: ${form.guests}`}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-whatsapp-success"
-          >
-            📱 Share on WhatsApp
-          </a>
           <button className="btn-new-booking" onClick={onBack}>Make Another Booking</button>
           <button className="btn-go-home" onClick={onHome}>← Back to Home</button>
         </div>
@@ -524,7 +516,7 @@ export default function BookingPage({ onHome }) {
           </div>
         </div>
         <div className="booking-topbar__info">
-          <span>📞 Call: <a href="tel:+918717984084">+91-731-400-0000</a></span>
+          <span>📞 Call: <a href="tel:+917314000000">+91-731-400-0000</a></span>
         </div>
       </div>
 
@@ -576,8 +568,8 @@ export default function BookingPage({ onHome }) {
             <h4>📍 Find Us</h4>
             <p>Plot No 2, Opp. Vishesh Hospital,<br />Geeta Bhawan, Indore</p>
             <div className="find-us-btns">
-              <a href="tel:+918717984084" className="find-us-btn">📞 Call</a>
-              <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="find-us-btn find-us-btn--gold">🗺️ Directions</a>
+              <a href="tel:+917314000000" className="find-us-btn">📞 Call</a>
+              <a href="https://www.google.com/maps/search/Coriander+Leaf+Restaurant,+Plot+No+2,+Opp+Vishesh+Hospital,+Geeta+Bhawan,+Indore/@22.7196,75.8686,17z" target="_blank" rel="noreferrer" className="find-us-btn find-us-btn--gold">🗺️ Directions</a>
             </div>
           </div>
         </div>

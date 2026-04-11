@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import MenuPage from './MenuPage.jsx';
 import BookingPage from './BookingPage.jsx';
+import ContactPage from './ContactPage.jsx';
+import GalleryPage from './GalleryPage.jsx';
 
 // ── Navbar ──────────────────────────────────────────────────────────────────
-function Navbar({ onMenuClick, onBookClick }) {
+function Navbar({ onMenuClick, onBookClick, onGalleryClick, onContactClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -14,15 +16,22 @@ function Navbar({ onMenuClick, onBookClick }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const navLinks = [
+    { label: 'Menu', action: onMenuClick },
+    { label: 'About Us', action: null },
+    { label: 'Gallery', action: onGalleryClick },
+    { label: 'Contact Us', action: onContactClick },
+  ];
+
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__logo">
         <div className="logo-icon">
           <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="22" cy="30" rx="18" ry="9" fill="#c8651b" opacity="0.9"/>
-            <path d="M22 4 C14 10 10 18 16 24 C20 28 24 26 26 22 C30 14 28 6 22 4Z" fill="#2d6a2d"/>
-            <path d="M22 4 C30 10 34 18 28 24 C24 28 20 26 18 22 C14 14 16 6 22 4Z" fill="#3a8a3a" opacity="0.7"/>
-            <circle cx="22" cy="4" r="2.5" fill="#4aaa4a"/>
+            <ellipse cx="22" cy="30" rx="18" ry="9" fill="#c8651b" opacity="0.9" />
+            <path d="M22 4 C14 10 10 18 16 24 C20 28 24 26 26 22 C30 14 28 6 22 4Z" fill="#2d6a2d" />
+            <path d="M22 4 C30 10 34 18 28 24 C24 28 20 26 18 22 C14 14 16 6 22 4Z" fill="#3a8a3a" opacity="0.7" />
+            <circle cx="22" cy="4" r="2.5" fill="#4aaa4a" />
           </svg>
         </div>
         <div className="logo-text">
@@ -36,11 +45,11 @@ function Navbar({ onMenuClick, onBookClick }) {
       </button>
 
       <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
-        {['Menu', 'About Us', 'Gallery', 'Contact Us'].map(link => (
-          <li key={link}>
-            {link === 'Menu'
-              ? <a href="#menu" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onMenuClick(); }}>{link}</a>
-              : <a href={`#${link.toLowerCase().replace(' ', '-')}`} onClick={() => setMenuOpen(false)}>{link}</a>
+        {navLinks.map(({ label, action }) => (
+          <li key={label}>
+            {action
+              ? <a href="#" onClick={(e) => { e.preventDefault(); setMenuOpen(false); action(); }}>{label}</a>
+              : <a href="#about-us" onClick={() => setMenuOpen(false)}>{label}</a>
             }
           </li>
         ))}
@@ -93,10 +102,10 @@ function About() {
     <section className="about" id="about-us">
       <div className="about__img-wrap">
         <div className="about__img-grid">
-          <div className="about__img about__img--1" style={{background:'linear-gradient(135deg,#2d5a27,#4a8c3f)'}}><span>🍛</span></div>
-          <div className="about__img about__img--2" style={{background:'linear-gradient(135deg,#5a3e28,#8c6440)'}}><span>☕</span></div>
-          <div className="about__img about__img--3" style={{background:'linear-gradient(135deg,#3a5c2a,#5a8c3a)'}}><span>🥗</span></div>
-          <div className="about__img about__img--4" style={{background:'linear-gradient(135deg,#6a4a2a,#a07040)'}}><span>🍰</span></div>
+          <div className="about__img about__img--1" style={{ background: 'linear-gradient(135deg,#2d5a27,#4a8c3f)' }}><span>🍛</span></div>
+          <div className="about__img about__img--2" style={{ background: 'linear-gradient(135deg,#5a3e28,#8c6440)' }}><span>☕</span></div>
+          <div className="about__img about__img--3" style={{ background: 'linear-gradient(135deg,#3a5c2a,#5a8c3a)' }}><span>🥗</span></div>
+          <div className="about__img about__img--4" style={{ background: 'linear-gradient(135deg,#6a4a2a,#a07040)' }}><span>🍰</span></div>
         </div>
         <div className="about__badge-float">
           <div className="about__badge-icon">✨</div>
@@ -176,7 +185,7 @@ const whyCards = [
   { icon: '🎵', title: 'Live Music Nights', desc: 'Enjoy your meal with soulful live music performances that elevate your dining experience' },
   { icon: '👨‍👩‍👧', title: 'Family-Friendly', desc: 'Warm, welcoming atmosphere perfect for family gatherings and celebrations' },
   { icon: '🌱', title: 'Vegan Options', desc: 'Wide variety of vegan-friendly dishes prepared with plant-based ingredients' },
-  { icon: '🚚', title: 'Delivery & Takeaway', desc: 'Enjoy our cuisine at home with reliable delivery and quick takeaway service' },
+  { icon: '📅', title: 'Easy Reservation', desc: 'Book your table online in minutes — same-day bookings welcome, no deposit required' },
   { icon: '⭐', title: '4.1 Star Rated', desc: 'Trusted by 1900+ happy customers who keep coming back for more' },
 ];
 
@@ -204,9 +213,10 @@ function WhyUs() {
 // ── Location ──────────────────────────────────────────────────────────────────
 function Location() {
   const MAPS_QUERY = encodeURIComponent('Coriander Leaf Restaurant, Plot No 2, Opp Vishesh Hospital, Geeta Bhawan, Indore, Madhya Pradesh');
-  const MAPS_EMBED  = `https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=${MAPS_QUERY}&zoom=16`;
-  const MAPS_OPEN   = `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`;
-  const MAPS_DIR    = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}`;
+  const MAPS_EMBED = `https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=${MAPS_QUERY}&zoom=16`;
+  const MAPS_OPEN = `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`;
+  const MAPS_DIR = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}`;
+  const Phone = '8717984084';
 
   return (
     <section className="location" id="contact-us">
@@ -236,13 +246,47 @@ function Location() {
             </div>
           </div>
           <div className="location__btns">
-            <a href="tel:+918717984084" className="btn btn--dark">📞 Call Now</a>
+            <a href={`tel: +91${Phone}`} className="btn btn--dark">📞 Call Now</a>
             <a href="https://maps.app.goo.gl/gq1XFjhqxx67ds5z8" target="_blank" rel="noreferrer" className="btn btn--primary">🗺️ Get Directions</a>
           </div>
         </div>
       </div>
     </section>
   );
+}
+
+// ── FAQ ────────────────────────────────────────────────────────────────
+const Faq = [
+  { q: 'Do you offer home delivery?',              a: 'Currently we offer dine-in only. Walk in or book a table in advance — we welcome you every day!' },
+  { q: 'Is advance booking mandatory?',            a: 'Not mandatory, but we strongly recommend booking, especially for weekends and special occasions.' },
+  { q: 'Do you accommodate Jain food requests?',  a: 'Absolutely. Please mention it in the special requests when booking or call us in advance.' },
+  { q: 'Is there parking near the restaurant?',   a: 'Yes, parking is available in the Geeta Bhawan area. Our staff can guide you on arrival.' },
+  { q: 'Can we host a private event or party?',   a: 'Yes! We accommodate corporate lunches, birthday parties, and family gatherings up to 100 guests.' },
+  { q: 'What are your opening hours?',             a: 'We are open every day — Lunch: 11:00 AM–4:00 PM and Dinner: 6:00 PM–11:00 PM.' },
+];
+
+function FAQ() {
+  const [openFaq, setOpenFaq] = useState(null);
+  return (
+    <section className="ct-faq">
+      <div className="ct-faq__header">
+        <p className="ct-eyebrow">FAQ</p>
+        <h2>Frequently Asked <span>Questions</span></h2>
+        <p>Quick answers to the things guests ask us most</p>
+      </div>
+      <div className="ct-faq-list">
+        {Faq.map((item, i) => (
+          <div key={i} className={`ct-faq-item ${openFaq === i ? 'ct-faq-item--open' : ''}`}>
+            <button className="ct-faq-q" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+              <span>{item.q}</span>
+              <span className="ct-faq-arrow">{openFaq === i ? '▲' : '▼'}</span>
+            </button>
+            {openFaq === i && <div className="ct-faq-a">{item.a}</div>}
+          </div>
+        ))}
+      </div>
+    </section>
+  )
 }
 
 // ── CTA Banner ────────────────────────────────────────────────────────────────
@@ -256,7 +300,7 @@ function CTABanner({ onBook }) {
         <p>Book your table today and treat yourself to an unforgettable culinary journey at Coriander Leaf Restaurant</p>
         <div className="cta-banner__btns">
           <button className="btn btn--primary" onClick={onBook}>Book a Table</button>
-          <a href="#menu" className="btn btn--outline-light">Order Now</a>
+          <a href="#menu" className="btn btn--outline-light">View Menu</a>
         </div>
         <div className="cta-banner__stats">
           <span>⭐ 4.1 Star Rating</span>
@@ -271,7 +315,7 @@ function CTABanner({ onBook }) {
 }
 
 // ── Footer ────────────────────────────────────────────────────────────────────
-function Footer({ onBook }) {
+function Footer({ onBook, onGallery, onContact }) {
   const [email, setEmail] = useState('');
   return (
     <footer className="footer">
@@ -279,9 +323,9 @@ function Footer({ onBook }) {
         <div className="footer__brand">
           <div className="footer__logo">
             <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-              <ellipse cx="22" cy="30" rx="18" ry="9" fill="#c8651b" opacity="0.9"/>
-              <path d="M22 4 C14 10 10 18 16 24 C20 28 24 26 26 22 C30 14 28 6 22 4Z" fill="#2d6a2d"/>
-              <path d="M22 4 C30 10 34 18 28 24 C24 28 20 26 18 22 C14 14 16 6 22 4Z" fill="#3a8a3a" opacity="0.7"/>
+              <ellipse cx="22" cy="30" rx="18" ry="9" fill="#c8651b" opacity="0.9" />
+              <path d="M22 4 C14 10 10 18 16 24 C20 28 24 26 26 22 C30 14 28 6 22 4Z" fill="#2d6a2d" />
+              <path d="M22 4 C30 10 34 18 28 24 C24 28 20 26 18 22 C14 14 16 6 22 4Z" fill="#3a8a3a" opacity="0.7" />
             </svg>
             <div>
               <div className="footer__logo-name">Coriander Leaf</div>
@@ -290,16 +334,17 @@ function Footer({ onBook }) {
           </div>
           <p>Experience authentic vegetarian cuisine in the heart of Indore. Where flavors meet tradition.</p>
           <div className="footer__socials">
-            {['IG','TW','FB'].map(s => <a key={s} href="#social" className="social-btn">{s === 'IG' ? '📸' : s === 'TW' ? '🐦' : '📘'}</a>)}
+            {['IG', 'TW', 'FB'].map(s => <a key={s} href="#social" className="social-btn">{s === 'IG' ? '📸' : s === 'TW' ? '🐦' : '📘'}</a>)}
           </div>
         </div>
 
         <div className="footer__col">
           <h4>Quick Links</h4>
-          {['Menu', 'About Us', 'Gallery', 'Reviews'].map(l => (
-            <a key={l} href={`#${l.toLowerCase().replace(/ /g, '-')}`}>{l}</a>
-          ))}
-          <button style={{background:'none',border:'none',cursor:'pointer',color:'rgba(255,255,255,.6)',fontSize:'.875rem',textAlign:'left',padding:0,marginTop:'.5rem',transition:'color .2s'}} onClick={onBook}>Book a Table</button>
+          <a href="#about-us">About Us</a>
+          <a href="#menu" onClick={e => { e.preventDefault(); }} style={{ cursor: 'pointer' }}>Menu</a>
+          <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,.6)', fontSize: '.875rem', textAlign: 'left', padding: 0, marginBottom: '.5rem', transition: 'color .2s' }} onClick={onGallery}>Gallery</button>
+          <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,.6)', fontSize: '.875rem', textAlign: 'left', padding: 0, marginBottom: '.5rem', transition: 'color .2s' }} onClick={onContact}>Contact Us</button>
+          <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,.6)', fontSize: '.875rem', textAlign: 'left', padding: 0, transition: 'color .2s' }} onClick={onBook}>Book a Table</button>
         </div>
 
         <div className="footer__col">
@@ -337,23 +382,31 @@ function Footer({ onBook }) {
 
 // ── App ───────────────────────────────────────────────────────────────────────
 export default function App() {
-  const [page, setPage] = useState('home'); // 'home' | 'menu' | 'booking'
+  const [page, setPage] = useState('home'); // 'home'|'menu'|'booking'|'gallery'|'contact'
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }, [page]);
 
-  if (page === 'menu')    return <MenuPage    onBack={() => setPage('home')} />;
+  if (page === 'menu') return <MenuPage onBack={() => setPage('home')} onBook={() => setPage('booking')} />;
   if (page === 'booking') return <BookingPage onHome={() => setPage('home')} />;
+  if (page === 'gallery') return <GalleryPage onHome={() => setPage('home')} onBook={() => setPage('booking')} />;
+  if (page === 'contact') return <ContactPage onHome={() => setPage('home')} onBook={() => setPage('booking')} />;
 
   return (
     <>
-      <Navbar onMenuClick={() => setPage('menu')} onBookClick={() => setPage('booking')} />
+      <Navbar
+        onMenuClick={() => setPage('menu')}
+        onBookClick={() => setPage('booking')}
+        onGalleryClick={() => setPage('gallery')}
+        onContactClick={() => setPage('contact')}
+      />
       <Hero onBook={() => setPage('booking')} />
       <About />
       <MenuSection onExplore={() => setPage('menu')} />
       <WhyUs />
       <Location />
+      <FAQ />
       <CTABanner onBook={() => setPage('booking')} />
-      <Footer onBook={() => setPage('booking')} />
+      <Footer onBook={() => setPage('booking')} onGallery={() => setPage('gallery')} onContact={() => setPage('contact')} />
     </>
   );
 }

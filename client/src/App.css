@@ -635,6 +635,50 @@ img { display: block; width: 100%; }
 }
 .location__btns .btn { flex: 1; text-align: center; }
 
+
+/* ══════════════════════════════════════════════════════
+   FAQ
+   ══════════════════════════════════════════════════════ */
+.ct-faq {
+  background:var(--mint-bg);
+  padding:4rem 1.5rem;
+}
+.ct-faq__header { text-align:center; margin-bottom:2.5rem; }
+.ct-faq__header h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.6rem,3vw,2.2rem); color:var(--text-dark); margin-bottom:.5rem;
+}
+.ct-faq__header h2 span { color:var(--green-light); }
+.ct-faq__header p { color:var(--text-mid); font-size:.95rem; }
+
+.ct-faq-list { max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:.75rem; }
+
+.ct-faq-item {
+  background:var(--white); border-radius:12px;
+  border:1.5px solid #d8e8d8;
+  overflow:hidden; transition:box-shadow .2s;
+}
+.ct-faq-item--open { box-shadow:0 4px 16px rgba(0,0,0,.08); border-color:var(--green-light); }
+
+.ct-faq-q {
+  width:100%; display:flex; justify-content:space-between; align-items:center;
+  padding:1rem 1.25rem; background:none; border:none;
+  font-family:'DM Sans',sans-serif; font-size:.92rem; font-weight:600;
+  color:var(--text-dark); cursor:pointer; text-align:left; gap:1rem;
+  transition:background .15s;
+}
+.ct-faq-q:hover { background:#f8faf8; }
+.ct-faq-arrow { font-size:.72rem; color:var(--text-light); flex-shrink:0; }
+.ct-faq-item--open .ct-faq-q { color:var(--green-dark); }
+
+.ct-faq-a {
+  padding:0 1.25rem 1rem;
+  font-size:.88rem; color:var(--text-mid); line-height:1.7;
+  animation:fadeDown .2s ease;
+}
+@keyframes fadeDown { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+
+
 /* ══════════════════════════════════════════════════════
    CTA BANNER
    ══════════════════════════════════════════════════════ */
